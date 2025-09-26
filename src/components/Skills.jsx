@@ -56,14 +56,7 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
       onMouseLeave={() => setHoveredSkill(null)}
     >
       {/* Circle + Title */}
-      <div className="flex items-center gap-2">
-        <div
-          className="circle w-5 h-5 rounded-full border transition-all duration-500"
-          style={{
-            borderColor: 'var(--color-secondary)',
-            backgroundColor: 'transparent'
-          }}
-        ></div>
+      <div className="flex items-center justify-between w-full">
         <h3
           className="font-main text-2xl font-semibold transition-colors duration-500"
           style={{
@@ -72,6 +65,13 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
         >
           {title}
         </h3>
+        <div
+          className="circle w-5 h-5 rounded-full border transition-all duration-500"
+          style={{
+            borderColor: 'var(--color-secondary)',
+            backgroundColor: 'transparent'
+          }}
+        ></div>
       </div>
 
       {/* Stack Reveal - Top Right */}
@@ -157,7 +157,7 @@ const Skills = () => {
       transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
     >
       {/* ROW 1 */}
-      <div className="h-[20vh] flex border-b" style={{ borderBottomColor: 'var(--color-secondary)' }}>
+      <div className="h-[30vh] flex border-b" style={{ borderBottomColor: 'var(--color-secondary)' }}>
         <div className="w-1/2 flex items-start justify-start py-8 px-9 h-auto">
           <h2 className="font-main text-6xl font-medium" style={{ color: 'var(--color-background)' }}>
             MY EXPERTISE&nbsp;↗
@@ -167,7 +167,7 @@ const Skills = () => {
       </div>
 
       {/* ROW 2 */}
-      <div className="h-[20vh] flex border-b" style={{ borderBottomColor: 'var(--color-secondary)' }}>
+      <div className="h-[30vh] flex border-b" style={{ borderBottomColor: 'var(--color-secondary)' }}>
         <SkillItem title="Web Design" hoveredSkill={hoveredSkill} setHoveredSkill={setHoveredSkill} />
         <div className="w-1/2 flex">
           <SkillItem title="Cloud" borderLeft hoveredSkill={hoveredSkill} setHoveredSkill={setHoveredSkill} />
@@ -176,7 +176,7 @@ const Skills = () => {
       </div>
 
       {/* ROW 3 */}
-      <div className="h-[20vh] flex">
+      <div className="h-[30vh] flex">
         <div className="w-1/2 flex">
           <SkillItem title="Database" hoveredSkill={hoveredSkill} setHoveredSkill={setHoveredSkill} />
           <SkillItem title="Deployment" borderLeft hoveredSkill={hoveredSkill} setHoveredSkill={setHoveredSkill} />
