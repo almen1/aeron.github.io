@@ -50,7 +50,8 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
       className={`w-1/2 flex items-start justify-start h-auto py-4 px-4 transition-all duration-500 hover:cursor-pointer relative select-none ${borderLeft ? "border-l" : ""}`}
       style={{
         borderLeftColor: borderLeft ? 'var(--color-secondary)' : undefined,
-        backgroundColor: isHovered ? 'var(--color-background)' : 'transparent'
+        backgroundColor: isHovered ? 'var(--color-background)' : 'transparent',
+        cursor: 'none'
       }}
       onMouseEnter={() => setHoveredSkill(title)}
       onMouseLeave={() => setHoveredSkill(null)}
