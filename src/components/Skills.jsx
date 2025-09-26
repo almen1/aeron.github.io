@@ -40,8 +40,8 @@ const Skills = () => {
     let lastX = 0;
     let lastY = 0;
     let lastSpawnTime = 0;
-    const distanceThreshold = 40;   // px movement before new icon
-    const timeThreshold = 120;      // ms between spawns
+    const distanceThreshold = 70;   // px movement before new icon
+    const timeThreshold = 180;      // ms between spawns
 
     const createTrailIcon = (x, y) => {
       const icon = document.createElement("img");
