@@ -25,12 +25,20 @@ const Skills = () => {
           </h2>
         </div>
         {/* Web Development */}
-        <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4"
+        <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4 transition-all duration-300 hover:cursor-pointer"
           style={{
             borderLeftColor: 'var(--color-secondary)'
           }}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = 'var(--color-background)'
+            e.target.querySelector('h3').style.color = 'var(--color-primary)'
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent'
+            e.target.querySelector('h3').style.color = 'var(--color-background)'
+          }}
         >
-          <h3 className="font-main text-2xl font-medium" style={{ color: 'var(--color-background)' }}>
+          <h3 className="font-main text-2xl font-semibold" style={{ color: 'var(--color-background)' }}>
             Web Development
           </h3>
         </div>
@@ -42,12 +50,20 @@ const Skills = () => {
         }}
       >
         {/* Web Design */}
-        <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4"
+        <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4 transition-all duration-300 hover:cursor-pointer"
           style={{
             borderLeftColor: 'var(--color-secondary)'
           }}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = 'var(--color-background)'
+            e.target.querySelector('h3').style.color = 'var(--color-primary)'
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent'
+            e.target.querySelector('h3').style.color = 'var(--color-background)'
+          }}
         >
-          <h3 className="font-main text-2xl font-medium" style={{ color: 'var(--color-background)' }}>
+          <h3 className="font-main text-2xl font-semibold" style={{ color: 'var(--color-background)' }}>
             Web Design
           </h3>
         </div>
@@ -57,21 +73,37 @@ const Skills = () => {
             borderLeftColor: 'var(--color-secondary)'
           }}
         >
-          <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4"
+          <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4 transition-all duration-300 hover:cursor-pointer"
             style={{
               borderLeftColor: 'var(--color-secondary)'
             }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = 'var(--color-background)'
+              e.target.querySelector('h3').style.color = 'var(--color-primary)'
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = 'transparent'
+              e.target.querySelector('h3').style.color = 'var(--color-background)'
+            }}
           >
-            <h3 className="font-main text-2xl font-medium" style={{ color: 'var(--color-background)' }}>
+            <h3 className="font-main text-2xl font-semibold" style={{ color: 'var(--color-background)' }}>
               Cloud
             </h3>
           </div>
-          <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4"
+          <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4 transition-all duration-300 hover:cursor-pointer"
             style={{
               borderLeftColor: 'var(--color-secondary)'
             }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = 'var(--color-background)'
+              e.target.querySelector('h3').style.color = 'var(--color-primary)'
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = 'transparent'
+              e.target.querySelector('h3').style.color = 'var(--color-background)'
+            }}
           >
-            <h3 className="font-main text-2xl font-medium" style={{ color: 'var(--color-background)' }}>
+            <h3 className="font-main text-2xl font-semibold" style={{ color: 'var(--color-background)' }}>
               Testing
             </h3>
           </div>
@@ -81,32 +113,56 @@ const Skills = () => {
       <div className="h-[20vh] flex">
         {/* Database & Deployment */}
         <div className="w-1/2 flex">
-          <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4"
+          <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4 transition-all duration-300 hover:cursor-pointer"
             style={{
               borderLeftColor: 'var(--color-secondary)'
             }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = 'var(--color-background)'
+              e.target.querySelector('h3').style.color = 'var(--color-primary)'
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = 'transparent'
+              e.target.querySelector('h3').style.color = 'var(--color-background)'
+            }}
           >
-            <h3 className="font-main text-2xl font-medium" style={{ color: 'var(--color-background)' }}>
+            <h3 className="font-main text-2xl font-semibold" style={{ color: 'var(--color-background)' }}>
               Database
             </h3>
           </div>
-          <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4"
+          <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4 transition-all duration-300 hover:cursor-pointer"
             style={{
               borderLeftColor: 'var(--color-secondary)'
             }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = 'var(--color-background)'
+              e.target.querySelector('h3').style.color = 'var(--color-primary)'
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = 'transparent'
+              e.target.querySelector('h3').style.color = 'var(--color-background)'
+            }}
           >
-            <h3 className="font-main text-2xl font-medium" style={{ color: 'var(--color-background)' }}>
+            <h3 className="font-main text-2xl font-semibold" style={{ color: 'var(--color-background)' }}>
               Deployment
             </h3>
           </div>
         </div>
         {/* Project Management */}
-        <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4"
+        <div className="w-1/2 flex items-end justify-start border-l h-auto py-4 px-4 transition-all duration-300 hover:cursor-pointer"
           style={{
             borderLeftColor: 'var(--color-secondary)'
           }}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = 'var(--color-background)'
+            e.target.querySelector('h3').style.color = 'var(--color-primary)'
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent'
+            e.target.querySelector('h3').style.color = 'var(--color-background)'
+          }}
         >
-          <h3 className="font-main text-2xl font-medium" style={{ color: 'var(--color-background)' }}>
+          <h3 className="font-main text-2xl font-semibold" style={{ color: 'var(--color-background)' }}>
             Project Management
           </h3>
         </div>
