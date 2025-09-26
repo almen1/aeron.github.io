@@ -23,7 +23,7 @@ const Hero = () => {
   return (
     <section 
       ref={sectionRef}
-      className="h-[80vh] border-b px-9 py-4"
+      className="h-[90vh] border-b px-9 py-4"
       style={{ 
         borderBottomColor: 'var(--color-secondary)',
         opacity: 0 // Initial CSS opacity to prevent flash

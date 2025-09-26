@@ -226,7 +226,7 @@ const Skills = () => {
         <div className="w-1/2 flex items-start justify-start py-8 px-9 h-auto">
           <h2 
             ref={headerRef}
-            className="font-main text-6xl font-medium"
+            className="font-main text-6xl font-medium cursor-enlarge"
             style={{ color: 'var(--color-background)', cursor: 'pointer' }}
           >
             MY EXPERTISE ↗

@@ -18,7 +18,16 @@ const CustomCursor = () => {
       const elementAtCursor = document.elementFromPoint(e.clientX, e.clientY)
 
       if (elementAtCursor) {
-        if (elementAtCursor.tagName === "A") {
+        // Check if hovering over section headings with cursor-enlarge class
+        if (elementAtCursor.classList.contains('cursor-enlarge')) {
+          gsap.to(cursor, {
+            backgroundColor: "#ffffff",
+            scale: 2.2,
+            mixBlendMode: "difference",
+            duration: 0.4,
+            ease: "power2.out"
+          })
+        } else if (elementAtCursor.tagName === "A") {
           gsap.to(cursor, {
             backgroundColor: "var(--color-secondary)",
             scale: 0.3,

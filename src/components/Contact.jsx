@@ -75,7 +75,7 @@ const Contact = () => {
           <div className="flex items-center">
             <h2 
               ref={headerRef}
-              className="font-main text-6xl font-medium"
+              className="font-main text-6xl font-medium cursor-enlarge"
               style={{ color: 'var(--color-background)', cursor: 'pointer' }}
             >
               GET IN TOUCH ↗
