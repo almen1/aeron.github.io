@@ -1,7 +1,7 @@
 import { motion, useMotionValue, useSpring } from "motion/react"
 import { useEffect } from "react"
 
-const CustomCursor = () => {
+const CustomCursor = ({ inverted = false }) => {
   // Custom cursor with motion values
   const cursorX = useMotionValue(0)
   const cursorY = useMotionValue(0)
@@ -26,20 +26,20 @@ const CustomCursor = () => {
         y: springY,
       }}
     >
-      <motion.div
-        className="w-8 h-8 rounded-full"
-        style={{
-          backgroundColor: 'var(--color-background)',
-        }}
-        animate={{
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 1.5,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
+       <motion.div
+         className="w-8 h-8 rounded-full"
+         style={{
+           backgroundColor: inverted ? 'var(--color-primary)' : 'var(--color-background)',
+         }}
+         animate={{
+           scale: [1, 1.1, 1],
+         }}
+         transition={{
+           duration: 1.5,
+           repeat: Infinity,
+           ease: "easeInOut"
+         }}
+       />
     </motion.div>
   )
 }

@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "motion/react"
 import { useState, useEffect } from "react"
+import CustomCursor from "./CustomCursor"
 
 const LoadingScreen = ({ onComplete }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -93,6 +94,9 @@ const LoadingScreen = ({ onComplete }) => {
           </motion.div>
         </AnimatePresence>
       </div>
+      
+      {/* Custom cursor with inverted colors for loading screen */}
+      <CustomCursor inverted={true} />
     </motion.div>
   )
 }
