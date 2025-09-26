@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { motion } from "motion/react"
 
 const skillsData = {
-  "Web Development": ["React", "Laravel", "Node.js"],
-  "Web Design": ["Figma", "Tailwind", "Materialize"],
-  "Cloud": ["AWS", "Firebase"],
+  "Web Development": ["React", "Next.js", "JavaScript", "Node.js", "Laravel", "TailwindCSS", "Python", "C#", "ASP.NET"],
+  "Web Design": ["Figma", "Canva"],
+  "Cloud": ["Microsoft Azure", "Amazon Lightsail", "Vercel"],
   "Testing": ["Jest", "Cypress"],
-  "Database": ["MySQL", "MongoDB"],
+  "Database": ["MySQL", "Supabase", "Firebase Firestore", "SQLite", "MariaDB"],
   "Deployment": ["Vercel", "Netlify", "Docker"],
-  "Project Management": ["Trello", "Jira", "Agile"]
+  "Project Management": ["ClickUp", "Trello", "Microsoft Teams", "Git", "GitHub"]
 }
 
 const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
@@ -16,7 +16,7 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
 
   return (
     <div
-      className={`w-1/2 flex items-end justify-between h-auto py-4 px-4 transition-all duration-500 hover:cursor-pointer relative select-none ${borderLeft ? "border-l" : ""}`}
+      className={`w-1/2 flex items-start justify-start h-auto py-4 px-4 transition-all duration-500 hover:cursor-pointer relative select-none ${borderLeft ? "border-l" : ""}`}
       style={{
         borderLeftColor: borderLeft ? 'var(--color-secondary)' : undefined,
         backgroundColor: isHovered ? 'var(--color-background)' : 'transparent'
@@ -43,22 +43,51 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
         </h3>
       </div>
 
-      {/* Stack Reveal */}
+      {/* Stack Reveal - Top Right */}
       <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : 20 }}
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : -10 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="flex flex-col items-end pr-2 text-right"
+        className="absolute bottom-4 right-4 flex items-end text-right max-w-[200px]"
       >
-        {skillsData[title]?.map((stack, idx) => (
-          <span
-            key={idx}
-            className="text-sm font-medium"
-            style={{ color: 'var(--color-secondary)' }}
-          >
-            {stack}
-          </span>
-        ))}
+        {title === "Web Development" ? (
+          <div className="flex gap-4">
+            <div className="flex flex-col">
+              {skillsData[title]?.slice(0, Math.ceil(skillsData[title].length / 2)).map((stack, idx) => (
+                <span
+                  key={idx}
+                  className="text-sm font-medium uppercase tracking-wide leading-tight"
+                  style={{ color: 'var(--color-secondary)' }}
+                >
+                  {stack}
+                </span>
+              ))}
+            </div>
+            <div className="flex flex-col">
+              {skillsData[title]?.slice(Math.ceil(skillsData[title].length / 2)).map((stack, idx) => (
+                <span
+                  key={idx}
+                  className="text-sm font-medium uppercase tracking-wide leading-tight"
+                  style={{ color: 'var(--color-secondary)' }}
+                >
+                  {stack}
+                </span>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col">
+            {skillsData[title]?.map((stack, idx) => (
+              <span
+                key={idx}
+                className="text-sm font-medium uppercase tracking-wide leading-tight"
+                style={{ color: 'var(--color-secondary)' }}
+              >
+                {stack}
+              </span>
+            ))}
+          </div>
+        )}
       </motion.div>
     </div>
   )
