@@ -16,7 +16,7 @@ const About = () => {
         {/* Left side - Title */}
         <div className="w-1/2 flex items-start justify-start">
           <div className="flex items-center">
-            <h2 className="font-main text-5xl font-medium" style={{ color: 'var(--color-background)' }}>
+            <h2 className="font-main text-6xl font-medium" style={{ color: 'var(--color-background)' }}>
               ABOUT MYSELF&nbsp;↗
             </h2>
           </div>
@@ -24,7 +24,7 @@ const About = () => {
 
         {/* Right side - Description */}
         <div className="w-1/2 flex items-start justify-start">
-          <p className="font-main text-xl leading-relaxed tracking-wider" style={{ color: 'var(--color-secondary)' }}>
+          <p className="font-main text-xl font-medium leading-relaxed tracking-wider" style={{ color: 'var(--color-secondary)' }}>
             I'm Aeron Almendras, a passionate web designer and developer who creates visually striking, user-focused websites. I love transforming creative ideas into engaging digital experiences that seamlessly blend beautiful design with powerful functionality.
           </p>
         </div>

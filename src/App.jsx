@@ -9,6 +9,7 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Skills from './components/Skills'
 import Works from './components/Works'
+import Marquee from './components/Marquee'
 import Contact from './components/Contact'
 import BackToTop from './components/BackToTop'
 
@@ -39,6 +40,7 @@ function App() {
             <About />
             <Skills />
             <Works />
+            {/* <Marquee /> */}
             <Contact />
           </div>
           

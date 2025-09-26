@@ -13,7 +13,7 @@
   /* Color Palette - Dark Theme (Default) */
   --color-primary: #000000; /* main surface */
   --color-secondary: #515151; /* muted text */
-  --color-background: #FEFAF6; /* main text */
+  --color-background: #FFFFFF; /* main text */
   --color-text-muted: #D6D2CD; /* lighter muted */
   
   /* OKLCH equivalents */
