@@ -9,18 +9,6 @@ const LoadingScreen = ({ onComplete }) => {
 
   const helloWords = [
     "HELLO", // English
-    "HOLA", // Spanish
-    "BONJOUR", // French
-    "GUTEN TAG", // German
-    "CIAO", // Italian
-    "OLÁ", // Portuguese
-    "ПРИВЕТ", // Russian
-    "こんにちは", // Japanese
-    "안녕하세요", // Korean
-    "你好", // Chinese
-    "مرحبا", // Arabic
-    "NAMASTE", // Hindi
-    "SAWUBONA", // Zulu
     "KUMUSTA" // Filipino (final word)
   ]
 
