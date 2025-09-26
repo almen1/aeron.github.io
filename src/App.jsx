@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "motion/react"
 import { useState } from "react"
 import './App.css'
 import LoadingScreen from './components/LoadingScreen'
+import Footer from './components/footer'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -19,7 +20,7 @@ function App() {
       </AnimatePresence>
       
       <motion.div 
-        className="w-screen min-h-screen"
+        className="w-screen min-h-screen pb-16"
         style={{ backgroundColor: 'var(--color-primary)' }}
         initial={{ opacity: 1 }}
         animate={{ 
@@ -36,17 +37,19 @@ function App() {
           transition={{ 
             duration: 1,
             ease: "easeOut",
-            delay: isLoading ? 0 : 0.5
+            delay: isLoading ? 0 : 0.3
           }}
         >
           <h1 
-            className='text-4xl font-bold'
+            className='text-4xl font-bold font-main'
             style={{ color: 'var(--color-background)' }}
           >
             Hello World
           </h1>
         </motion.div>
       </motion.div>
+      
+      <Footer />
     </>
   )
 }

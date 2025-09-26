@@ -1,10 +1,13 @@
 @import "tailwindcss";
 
+@import url('https://api.fontshare.com/v2/css?f[]=switzer@1,2&display=swap');
+
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Switzer', sans-serif;
   
   /* Color Palette - Dark Theme (Default) */
   --color-primary: #000000; /* main surface */
@@ -94,4 +97,12 @@
 
 @utility smooth-fade-in {
   animation: smooth-fade-in 0.8s ease-out;
+}
+
+@utility font-main {
+  font-family: 'Switzer', sans-serif;
+}
+
+@utility text-background {
+  color: var(--color-background);
 }

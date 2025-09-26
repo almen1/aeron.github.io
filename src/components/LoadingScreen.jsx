@@ -49,9 +49,9 @@ const LoadingScreen = ({ onComplete }) => {
         setIsZooming(true)
       }, 600)
 
-      const completeTimer = setTimeout(() => {
-        onComplete()
-      }, 2500)
+        const completeTimer = setTimeout(() => {
+          onComplete()
+        }, 2200)
 
       return () => {
         clearTimeout(zoomTimer)
@@ -81,12 +81,13 @@ const LoadingScreen = ({ onComplete }) => {
             exit={{ y: -100, opacity: 0, scale: 0.9 }}
             transition={{ 
               duration: showKumusta && isZooming ? 1.5 : 0.3,
-              ease: showKumusta && isZooming ? [0.43, 0.195, 0.02, 1] : [0.25, 0.46, 0.45, 0.94]
+              ease: showKumusta && isZooming  ? [0.76, 0, 0.24, 1]
+              : [0.43, 0.195, 0.02, 1]
             }}
               style={{
                 color: currentIndex === helloWords.length - 1 ? 'var(--color-primary)' : 'var(--color-secondary)'
               }}
-            className="text-6xl font-bold"
+            className="text-6xl font-bold font-main"
           >
             {helloWords[currentIndex]}
           </motion.div>
