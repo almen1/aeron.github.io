@@ -11,6 +11,37 @@ const skillsData = {
   "Project Management": ["ClickUp", "Trello", "Microsoft Teams", "Git", "GitHub"]
 }
 
+const skillIcons = {
+  "React": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/react.svg",
+  "Next.js": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/nextdotjs.svg",
+  "JavaScript": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/javascript.svg",
+  "Node.js": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/nodedotjs.svg",
+  "Laravel": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/laravel.svg",
+  "TailwindCSS": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tailwindcss.svg",
+  "Python": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg",
+  "C#": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/csharp.svg",
+  "ASP.NET": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/dotnet.svg",
+  "Figma": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/figma.svg",
+  "Canva": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/canva.svg",
+  "Microsoft Azure": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftazure.svg",
+  "Amazon Lightsail": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/amazonaws.svg",
+  "Vercel": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vercel.svg",
+  "Jest": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/jest.svg",
+  "Cypress": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/cypress.svg",
+  "MySQL": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mysql.svg",
+  "Supabase": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/supabase.svg",
+  "Firebase Firestore": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/firebase.svg",
+  "SQLite": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/sqlite.svg",
+  "MariaDB": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mariadb.svg",
+  "Netlify": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/netlify.svg",
+  "Docker": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/docker.svg",
+  "ClickUp": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/clickup.svg",
+  "Trello": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/trello.svg",
+  "Microsoft Teams": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftteams.svg",
+  "Git": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg",
+  "GitHub": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
+}
+
 const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
   const isHovered = hoveredSkill === title
 
@@ -48,43 +79,64 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : -10 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="absolute bottom-4 right-4 flex items-end text-right max-w-[200px]"
+        className="absolute bottom-4 left-4 flex items-end text-right max-w-[200px]"
       >
         {title === "Web Development" ? (
-          <div className="flex gap-4">
+          <div className="flex gap-8">
             <div className="flex flex-col">
               {skillsData[title]?.slice(0, Math.ceil(skillsData[title].length / 2)).map((stack, idx) => (
-                <span
-                  key={idx}
-                  className="text-sm font-medium uppercase tracking-wide leading-tight"
-                  style={{ color: 'var(--color-secondary)' }}
-                >
-                  {stack}
-                </span>
+                <div key={idx} className="flex items-center gap-1">
+                  <img 
+                    src={skillIcons[stack]} 
+                    alt={stack}
+                    className="w-3.5 h-3.5"
+                    style={{ filter: 'brightness(0) saturate(100%) invert(35%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)' }}
+                  />
+                  <span
+                    className="text-sm font-medium uppercase tracking-wide leading-tight"
+                    style={{ color: 'var(--color-secondary)' }}
+                  >
+                    {stack}
+                  </span>
+                </div>
               ))}
             </div>
             <div className="flex flex-col">
               {skillsData[title]?.slice(Math.ceil(skillsData[title].length / 2)).map((stack, idx) => (
-                <span
-                  key={idx}
-                  className="text-sm font-medium uppercase tracking-wide leading-tight"
-                  style={{ color: 'var(--color-secondary)' }}
-                >
-                  {stack}
-                </span>
+                <div key={idx} className="flex items-center gap-1">
+                  <img 
+                    src={skillIcons[stack]} 
+                    alt={stack}
+                    className="w-3.5 h-3.5"
+                    style={{ filter: 'brightness(0) saturate(100%) invert(35%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)' }}
+                  />
+                  <span
+                    className="text-sm font-medium uppercase tracking-wide leading-tight"
+                    style={{ color: 'var(--color-secondary)' }}
+                  >
+                    {stack}
+                  </span>
+                </div>
               ))}
             </div>
           </div>
         ) : (
           <div className="flex flex-col">
             {skillsData[title]?.map((stack, idx) => (
-              <span
-                key={idx}
-                className="text-sm font-medium uppercase tracking-wide leading-tight"
-                style={{ color: 'var(--color-secondary)' }}
-              >
-                {stack}
-              </span>
+              <div key={idx} className="flex items-center gap-1">
+                <img 
+                  src={skillIcons[stack]} 
+                  alt={stack}
+                  className="w-3.5 h-3.5"
+                  style={{ filter: 'brightness(0) saturate(100%) invert(35%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)' }}
+                />
+                <span
+                  className="text-sm font-medium uppercase tracking-wide leading-tight"
+                  style={{ color: 'var(--color-secondary)' }}
+                >
+                  {stack}
+                </span>
+              </div>
             ))}
           </div>
         )}
