@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { TextPlugin } from "gsap/TextPlugin"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-gsap.registerPlugin(TextPlugin, ScrollTrigger)
+gsap.registerPlugin(TextPlugin)
 
 const Hero = () => {
   const sectionRef = useRef(null)
@@ -19,7 +18,7 @@ const Hero = () => {
 
   // Reveal animations
   useEffect(() => {
-    const tl = gsap.timeline({ delay: 0.2 })
+    const tl = gsap.timeline()
     tl.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6 })
       .fromTo(webRef.current, { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.2")
       .fromTo(roleRef.current, { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.4")
@@ -129,25 +128,11 @@ const Hero = () => {
     }
   }, [])
 
-  // Covering effect - Hero gets covered by Skills section
-  useEffect(() => {
-    if (sectionRef.current) {
-      // Pin the Hero section so it stays in place
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "bottom top",
-        pin: true,
-        pinSpacing: false
-      })
-    }
-  }, [])
 
   return (
     <section
       ref={sectionRef}
-      className="h-screen flex flex-col border-b"
-      style={{ borderBottomColor: "var(--color-secondary)" }}
+      className="h-screen flex flex-col"
     >
       {/* 80vh dots */}
       <div className="relative h-[80vh] w-full overflow-hidden">
