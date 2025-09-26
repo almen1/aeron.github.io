@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
+import { TextPlugin } from 'gsap/TextPlugin'
+
+// Register the TextPlugin
+gsap.registerPlugin(TextPlugin)
 
 const skillsData = {
   "Web Development": ["React", "Next.js", "JavaScript", "Node.js", "Laravel", "TailwindCSS", "Python", "C#", "ASP.NET"],
@@ -44,6 +48,46 @@ const skillIcons = {
 
 const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
   const isHovered = hoveredSkill === title
+  const titleRef = useRef(null)
+
+  const handleMouseEnter = () => {
+    setHoveredSkill(title)
+    // Copy the exact MY EXPERTISE effect
+    if (titleRef.current) {
+      const chars = "!@#$%^&*()_+{}[]<>?/abcdefghijklmnopqrstuvwxyz".split("")
+      let interval
+
+      const shuffleText = () => {
+        let i = 0
+        interval = setInterval(() => {
+          const scrambled = title
+            .split("")
+            .map((char, idx) => {
+              if (char === " ") return " " // keep spaces
+              return idx < i ? title[idx] : chars[Math.floor(Math.random() * chars.length)]
+            })
+            .join("")
+          titleRef.current.textContent = scrambled
+
+          if (i >= title.length) {
+            clearInterval(interval)
+            titleRef.current.textContent = title
+          }
+          i++
+        }, 50) // speed of shuffle
+      }
+
+      shuffleText()
+    }
+  }
+
+  const handleMouseLeave = () => {
+    setHoveredSkill(null)
+    // Reset title text back to original
+    if (titleRef.current) {
+      titleRef.current.textContent = title
+    }
+  }
 
   return (
     <div
@@ -53,12 +97,13 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
         backgroundColor: isHovered ? 'var(--color-background)' : 'transparent',
         cursor: 'none'
       }}
-      onMouseEnter={() => setHoveredSkill(title)}
-      onMouseLeave={() => setHoveredSkill(null)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Circle + Title */}
       <div className="flex items-center justify-between w-full">
         <h3
+          ref={titleRef}
           className="font-main text-2xl font-semibold transition-colors duration-500"
           style={{
             color: isHovered ? 'var(--color-primary)' : 'var(--color-background)'

@@ -1,4 +1,4 @@
-@import url('https://api.fontshare.com/v2/css?f[]=switzer@1,2&display=swap');
+@import url('https://fonts.cdnfonts.com/css/tt-hoves-pro-trial');
 
 @import "tailwindcss";
 
@@ -8,7 +8,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Switzer', sans-serif;
+  font-family: 'TT Hoves Pro Trial', sans-serif;
   
   /* Color Palette - Dark Theme (Default) */
   --color-primary: #000000; /* main surface */
@@ -101,7 +101,7 @@
 }
 
 @utility font-main {
-  font-family: 'Switzer', sans-serif;
+  font-family: 'TT Hoves Pro Trial', sans-serif;
 }
 
 @utility text-background {

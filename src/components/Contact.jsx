@@ -86,7 +86,7 @@ const Contact = () => {
         {/* Right side - Links */}
         <div className="w-1/2 flex flex-col items-start justify-start">
           <a 
-            href="https://github.com/yourusername" 
+            href="https://github.com/almen1" 
             target="_blank" 
             rel="noopener noreferrer"
             className="group flex items-center justify-between w-full py-4 border-b text-4xl font-main font-extralight transition-all duration-300"
@@ -101,7 +101,7 @@ const Contact = () => {
             <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">↗</span>
           </a>
           <a 
-            href="https://linkedin.com/in/yourusername" 
+            href="https://linkedin.com/in/aeron-almendras" 
             target="_blank" 
             rel="noopener noreferrer"
             className="group flex items-center justify-between w-full py-4 border-b text-4xl font-main font-extralight transition-all duration-300"
@@ -116,9 +116,7 @@ const Contact = () => {
             <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">↗</span>
           </a>
           <a 
-            href="https://facebook.com/yourusername" 
-            target="_blank" 
-            rel="noopener noreferrer"
+            href="mailto:aeronalmendras@gmail.com" 
             className="group flex items-center justify-between w-full py-4 border-b text-4xl font-main font-extralight transition-all duration-300"
             style={{ 
               color: 'var(--color-secondary)',
@@ -127,7 +125,7 @@ const Contact = () => {
             onMouseEnter={(e) => e.target.style.color = 'var(--color-background)'}
             onMouseLeave={(e) => e.target.style.color = 'var(--color-secondary)'}
           >
-            Facebook
+            Email
             <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">↗</span>
           </a>
         </div>
