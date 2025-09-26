@@ -16,12 +16,15 @@ const Hero = () => {
   const dimensionsRef = useRef({ w: 0, h: 0 })
   const dotsRef = useRef([])
 
-  // Reveal animations
+  // Reveal animations (no flash)
   useEffect(() => {
+    // Only animate text and fade section in
+    gsap.set([webRef.current, roleRef.current], { y: 80, opacity: 0 })
+
     const tl = gsap.timeline()
-    tl.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6 })
-      .fromTo(webRef.current, { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.2")
-      .fromTo(roleRef.current, { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.4")
+    tl.to(sectionRef.current, { opacity: 1, duration: 0.6 })
+      .to(webRef.current, { y: 0, opacity: 1, duration: 0.8 }, "-=0.2")
+      .to(roleRef.current, { y: 0, opacity: 1, duration: 0.8 }, "-=0.4")
   }, [])
 
   // Cycle roles
@@ -62,7 +65,7 @@ const Hero = () => {
 
     const createDots = () => {
       const w = window.innerWidth
-      const h = (window.innerHeight * 0.8) // only 80vh
+      const h = window.innerHeight * 0.8 // 80vh
       dimensionsRef.current = { w, h }
       canvas.width = w
       canvas.height = h
@@ -128,11 +131,10 @@ const Hero = () => {
     }
   }, [])
 
-
   return (
     <section
       ref={sectionRef}
-      className="h-screen flex flex-col"
+      className="h-screen flex flex-col opacity-0" // hidden until GSAP fade-in
     >
       {/* 80vh dots */}
       <div className="relative h-[80vh] w-full overflow-hidden">
@@ -143,26 +145,31 @@ const Hero = () => {
         />
       </div>
 
-       {/* 20vh text */}
-       <div className="relative h-[20vh] flex flex-col items-start justify-end z-10">
-         <div className="flex w-full max-w-6xl">
-           <div className="flex w-full max-w-6xl justify-start px-9 py-4">
-             <h1
-               className="font-main text-[64px] md:text-[120px] font-norma"
-               style={{ color: "var(--color-background)" }}
-             >
-               <span ref={webRef}>WEB&nbsp;</span>
-               <span ref={roleRef}></span>
-             </h1>
-           </div>
+      {/* 20vh text */}
+      <div className="relative h-[20vh] flex flex-col items-start justify-end z-10">
+        <div className="flex w-full max-w-6xl">
+          <div className="flex w-full max-w-6xl justify-start px-9 py-4">
+            <h1
+              className="font-main text-[64px] md:text-[120px] font-norma"
+              style={{ color: "var(--color-background)" }}
+            >
+              <span ref={webRef}>WEB&nbsp;</span>
+              <span ref={roleRef}></span>
+            </h1>
+          </div>
 
-           {/* Simple description */}
-           <div className="absolute right-9 top-10 max-w-md">
-             <p className="font-main text-sm font-normal leading-relaxed cursor-encapsulate" style={{ color: "var(--color-background)" }}>
-               I'M AERON ALMENDRAS, A WEB DESIGNER AND DEVELOPER DEDICATED TO BUILDING MODERN, USER-FOCUSED WEBSITES THAT COMBINE CREATIVE DESIGN WITH FUNCTIONALITY.
-             </p>
-           </div>
-         </div>
+          {/* Simple description */}
+          <div className="absolute right-9 top-10 max-w-md">
+            <p
+              className="font-main text-sm font-normal leading-relaxed cursor-encapsulate"
+              style={{ color: "var(--color-background)" }}
+            >
+              I'M AERON ALMENDRAS, A WEB DESIGNER AND DEVELOPER DEDICATED TO
+              BUILDING MODERN, USER-FOCUSED WEBSITES THAT COMBINE CREATIVE
+              DESIGN WITH FUNCTIONALITY.
+            </p>
+          </div>
+        </div>
 
         {/* Scroll arrow */}
         <div
