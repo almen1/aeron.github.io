@@ -1,10 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from "motion/react";
 
 const BackToTop = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [showText, setShowText] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const animationRef = useRef(null);
   const timeoutRef = useRef(null);
 
@@ -14,6 +15,32 @@ const BackToTop = () => {
       behavior: 'smooth'
     });
   };
+
+  // Show button when user is at 50% of About section
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      
+      // Show button when user is at 50% of About section (after Hero + 50% of About)
+      // Hero is 100vh, About is ~90vh, so 50% of About would be at ~145vh
+      const aboutSectionStart = windowHeight; // Start of About section
+      const aboutSectionHeight = windowHeight * 0.9; // Approximate About section height
+      const aboutSection50Percent = aboutSectionStart + (aboutSectionHeight * 0.5);
+      
+      if (scrollY >= aboutSection50Percent) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    // Initial check
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -48,8 +75,18 @@ const BackToTop = () => {
     <motion.div
       className="fixed bottom-12 right-12 z-50"
       initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      animate={{ 
+        opacity: isVisible ? 1 : 0, 
+        scale: isVisible ? 1 : 0,
+        y: isVisible ? 0 : 20
+      }}
+      transition={{ 
+        duration: 0.4, 
+        ease: "easeInOut"
+      }}
+      style={{ 
+        pointerEvents: isVisible ? 'auto' : 'none' 
+      }}
     >
       <motion.button
         className="relative w-16 h-16 rounded-full flex items-center justify-center cursor-pointer"
