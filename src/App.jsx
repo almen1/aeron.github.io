@@ -10,6 +10,7 @@ import About from './components/About'
 import Skills from './components/Skills'
 import Works from './components/Works'
 import Contact from './components/Contact'
+import BackToTop from './components/BackToTop'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -47,6 +48,7 @@ function App() {
 
       {/* Custom Cursor */}
       {!isLoading && <CustomCursor />}
+      {!isLoading && <BackToTop />}
     </>
   )
 }
