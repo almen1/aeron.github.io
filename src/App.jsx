@@ -34,7 +34,7 @@ function App() {
             style={{ backgroundColor: 'var(--color-primary)' }}
           >
             <Hero />
-            <About />
+            {/* <About /> */}
             <Skills />
             <Works />
             {/* <Marquee /> */}

@@ -46,7 +46,7 @@ const BackToTop = () => {
 
   return (
     <motion.div
-      className="fixed bottom-12 left-12 z-50"
+      className="fixed bottom-12 right-12 z-50"
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}

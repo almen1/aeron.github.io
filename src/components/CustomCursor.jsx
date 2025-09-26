@@ -32,7 +32,7 @@ const CustomCursor = () => {
         else if (elementAtCursor.classList.contains('cursor-encapsulate')) {
           gsap.to(cursor, {
             backgroundColor: "#ffffff",
-            scale: 15.0,
+            scale: 5.0,
             mixBlendMode: "difference",
             duration: 0.4,
             ease: "power2.out"

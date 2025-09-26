@@ -10,43 +10,21 @@ const Hero = () => {
   const roleRef = useRef(null)
   const scrollRef = useRef(null)
   const webRef = useRef(null)
-  const subtextRef = useRef(null)
 
   const roles = ["DEVELOPER", "DESIGNER"]
   const mouse = useRef({ x: -9999, y: -9999 })
   const dimensionsRef = useRef({ w: 0, h: 0 })
   const dotsRef = useRef([])
 
-  // Hero reveal animations
+  // Reveal animations
   useEffect(() => {
     const tl = gsap.timeline({ delay: 0.2 })
-
-    tl.fromTo(
-      sectionRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.6, ease: "power2.out" }
-    )
-      .fromTo(
-        webRef.current,
-        { y: 80, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-        "-=0.2"
-      )
-      .fromTo(
-        roleRef.current,
-        { y: 80, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-        "-=0.4"
-      )
-      .fromTo(
-        subtextRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-        "-=0.3"
-      )
+    tl.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6 })
+      .fromTo(webRef.current, { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.2")
+      .fromTo(roleRef.current, { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.4")
   }, [])
 
-  // Cycle roles with GSAP TextPlugin
+  // Cycle roles
   useEffect(() => {
     let i = 0
     const cycle = () => {
@@ -62,7 +40,7 @@ const Hero = () => {
     return () => clearInterval(interval)
   }, [])
 
-  // Scroll down animation
+  // Scroll arrow bounce
   useEffect(() => {
     if (scrollRef.current) {
       gsap.to(scrollRef.current, {
@@ -75,17 +53,16 @@ const Hero = () => {
     }
   }, [])
 
-  // Canvas background (untouched)
+  // Dot canvas background
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d")
-
     const gridSize = 30
     const size = 2
 
     const createDots = () => {
       const w = window.innerWidth
-      const h = window.innerHeight
+      const h = (window.innerHeight * 0.8) // only 80vh
       dimensionsRef.current = { w, h }
       canvas.width = w
       canvas.height = h
@@ -154,56 +131,52 @@ const Hero = () => {
   return (
     <section
       ref={sectionRef}
-      className="h-[100vh] border-b relative overflow-hidden"
-      style={{
-        borderBottomColor: "var(--color-secondary)",
-        opacity: 0,
-      }}
+      className="h-screen flex flex-col border-b"
+      style={{ borderBottomColor: "var(--color-secondary)", opacity: 0 }}
     >
-      {/* Dot grid background */}
-      <canvas
-        ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none"
-        style={{ zIndex: 1 }}
-      />
-
-      {/* Content */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center">
-        <div className="flex w-full max-w-6xl">
-          {/* Left column for WEB */}
-          <div className="w-[31%] flex justify-end">
-            <h1
-              ref={webRef}
-              className="font-main text-8xl md:text-[150px] font-bold"
-              style={{ color: "var(--color-background)" }}
-            >
-              WEB&nbsp;
-            </h1>
-          </div>
-
-          {/* Right column for cycling role */}
-          <div className="w-[69%] flex justify-start">
-            <h1
-              ref={roleRef}
-              className="font-main text-8xl md:text-[150px] font-bold"
-              style={{ color: "var(--color-background)" }}
-            />
-          </div>
-        </div>
+      {/* 80vh dots */}
+      <div className="relative h-[80vh] w-full overflow-hidden">
+        <canvas
+          ref={canvasRef}
+          className="absolute top-0 left-0 w-full h-full pointer-events-none"
+          style={{ zIndex: 1 }}
+        />
       </div>
 
-      {/* Scroll down animation */}
-      <div
-        ref={scrollRef}
-        className="absolute bottom-6 left-1/2 transform -translate-x-1/2"
-      >
-        <span
-          className="block w-6 h-6 border-l-2 border-b-2"
-          style={{
-            borderColor: "var(--color-background)",
-            transform: "rotate(-45deg)",
-          }}
-        />
+       {/* 20vh text */}
+       <div className="relative h-[20vh] flex flex-col items-start justify-end z-10">
+         <div className="flex w-full max-w-6xl">
+           <div className="flex w-full max-w-6xl justify-start px-9 py-4">
+             <h1
+               className="font-main text-[64px] md:text-[120px] font-norma"
+               style={{ color: "var(--color-background)" }}
+             >
+               <span ref={webRef}>WEB&nbsp;</span>
+               <span ref={roleRef}></span>
+             </h1>
+           </div>
+
+           {/* Simple description */}
+           <div className="absolute right-9 top-4 max-w-md">
+             <p className="font-main text-sm font-normal leading-relaxed cursor-encapsulate" style={{ color: "var(--color-background)" }}>
+               I'M AERON ALMENDRAS, A WEB DESIGNER AND DEVELOPER DEDICATED TO BUILDING MODERN, USER-FOCUSED WEBSITES THAT COMBINE CREATIVE DESIGN WITH FUNCTIONALITY.
+             </p>
+           </div>
+         </div>
+
+        {/* Scroll arrow */}
+        <div
+          ref={scrollRef}
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+        >
+          <span
+            className="block w-6 h-6 border-l-2 border-b-2"
+            style={{
+              borderColor: "var(--color-background)",
+              transform: "rotate(-45deg)",
+            }}
+          />
+        </div>
       </div>
     </section>
   )
