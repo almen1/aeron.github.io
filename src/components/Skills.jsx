@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { motion } from "motion/react"
+import React, { useState, useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
 
 const skillsData = {
   "Web Development": ["React", "Next.js", "JavaScript", "Node.js", "Laravel", "TailwindCSS", "Python", "C#", "ASP.NET"],
@@ -75,10 +75,17 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
       </div>
 
       {/* Stack Reveal - Top Right */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : -10 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+      <div
+        ref={el => {
+          if (el) {
+            gsap.set(el, { opacity: 0, y: -10 })
+            if (isHovered) {
+              gsap.to(el, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" })
+            } else {
+              gsap.to(el, { opacity: 0, y: -10, duration: 0.4, ease: "power2.out" })
+            }
+          }
+        }}
         className="absolute bottom-4 left-4 flex items-end text-right max-w-[200px]"
       >
         {title === "Web Development" ? (
@@ -140,21 +147,39 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
             ))}
           </div>
         )}
-      </motion.div>
+      </div>
     </div>
   )
 }
 
 const Skills = () => {
   const [hoveredSkill, setHoveredSkill] = useState(null)
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    if (sectionRef.current) {
+      // Set initial state immediately to prevent flash
+      gsap.set(sectionRef.current, { y: 50, opacity: 0 })
+      
+      // Then animate
+      gsap.to(sectionRef.current, { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        ease: "power2.out", 
+        delay: 0.4 
+      })
+    }
+  }, [])
 
   return (
-    <motion.section
+    <section
+      ref={sectionRef}
       className="h-fit border-b"
-      style={{ borderBottomColor: 'var(--color-secondary)' }}
-      initial={{ y: 50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+      style={{ 
+        borderBottomColor: 'var(--color-secondary)',
+        opacity: 0 // Initial CSS opacity to prevent flash
+      }}
     >
       {/* ROW 1 */}
       <div className="h-[30vh] flex border-b" style={{ borderBottomColor: 'var(--color-secondary)' }}>
@@ -183,7 +208,7 @@ const Skills = () => {
         </div>
         <SkillItem title="Project Management" borderLeft hoveredSkill={hoveredSkill} setHoveredSkill={setHoveredSkill} />
       </div>
-    </motion.section>
+    </section>
   )
 }
 

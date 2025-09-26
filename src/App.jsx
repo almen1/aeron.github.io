@@ -1,4 +1,3 @@
-import { motion, AnimatePresence } from "motion/react"
 import { useState } from "react"
 import './App.css'
 import LoadingScreen from './components/LoadingScreen'
@@ -22,11 +21,9 @@ function App() {
 
   return (
     <>
-      <AnimatePresence>
-        {isLoading && (
-          <LoadingScreen onComplete={handleLoadingComplete} />
-        )}
-      </AnimatePresence>
+      {isLoading && (
+        <LoadingScreen onComplete={handleLoadingComplete} />
+      )}
       
       {!isLoading && (
         <>

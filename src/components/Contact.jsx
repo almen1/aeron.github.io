@@ -1,16 +1,33 @@
-import React from 'react'
-import { motion } from "motion/react"
+import React, { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
 
 const Contact = () => {
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    if (sectionRef.current) {
+      // Set initial state immediately to prevent flash
+      gsap.set(sectionRef.current, { y: 50, opacity: 0 })
+      
+      // Then animate
+      gsap.to(sectionRef.current, { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        ease: "power2.out", 
+        delay: 0.6 
+      })
+    }
+  }, [])
+
   return (
-    <motion.section 
+    <section 
+      ref={sectionRef}
       className="h-fit border-b px-9"
       style={{ 
-        borderBottomColor: 'var(--color-secondary)'
+        borderBottomColor: 'var(--color-secondary)',
+        opacity: 0 // Initial CSS opacity to prevent flash
       }}
-      initial={{ y: 50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
     >
       <div className="h-full flex pt-8 pb-32">
         {/* Left side - Title */}
@@ -71,7 +88,7 @@ const Contact = () => {
           </a>
         </div>
       </div>
-    </motion.section>
+    </section>
   )
 }
 

@@ -27,7 +27,7 @@ const CustomCursor = ({ inverted = false }) => {
       }}
     >
        <motion.div
-         className="w-8 h-8 rounded-full"
+         className="w-4 h-4 rounded-full"
          style={{
            backgroundColor: inverted ? 'var(--color-primary)' : 'var(--color-background)',
          }}
