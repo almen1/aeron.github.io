@@ -66,6 +66,7 @@ const Works = () => {
       className="h-fit border-b px-9"
       style={{ 
         borderBottomColor: 'var(--color-secondary)',
+        backgroundColor: 'var(--color-primary)',
         opacity: 0 // Initial CSS opacity to prevent flash
       }}
     >

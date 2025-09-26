@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { TextPlugin } from 'gsap/TextPlugin'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-// Register the TextPlugin
-gsap.registerPlugin(TextPlugin)
+// Register the TextPlugin and ScrollTrigger
+gsap.registerPlugin(TextPlugin, ScrollTrigger)
 
 const skillsData = {
   "Web Development": ["React", "Next.js", "JavaScript", "Node.js", "Laravel", "TailwindCSS", "Python", "C#", "ASP.NET"],
@@ -212,15 +213,39 @@ const Skills = () => {
         header.removeEventListener("mouseleave", () => { })
       }
     }
+
+    // Covering effect - Skills slides up to cover Hero
+    if (sectionRef.current) {
+      gsap.fromTo(sectionRef.current, 
+        { 
+          y: "100vh", // Start from below the viewport
+          opacity: 0 
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "top top",
+            scrub: 1, // Smooth scrubbing tied to scroll
+            pin: false
+          }
+        }
+      )
+    }
   }, [])
 
   return (
     <section
       ref={sectionRef}
-      className="h-fit border-b"
+      className="h-fit border-b border-t"
       style={{
         borderBottomColor: 'var(--color-secondary)',
-        opacity: 0
+        borderTopColor: 'var(--color-secondary)',
+        backgroundColor: 'var(--color-primary)'
       }}
     >
       {/* ROW 1 */}

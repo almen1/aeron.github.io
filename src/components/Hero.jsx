@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { TextPlugin } from "gsap/TextPlugin"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-gsap.registerPlugin(TextPlugin)
+gsap.registerPlugin(TextPlugin, ScrollTrigger)
 
 const Hero = () => {
   const sectionRef = useRef(null)
@@ -128,11 +129,25 @@ const Hero = () => {
     }
   }, [])
 
+  // Covering effect - Hero gets covered by Skills section
+  useEffect(() => {
+    if (sectionRef.current) {
+      // Pin the Hero section so it stays in place
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top top",
+        end: "bottom top",
+        pin: true,
+        pinSpacing: false
+      })
+    }
+  }, [])
+
   return (
     <section
       ref={sectionRef}
       className="h-screen flex flex-col border-b"
-      style={{ borderBottomColor: "var(--color-secondary)", opacity: 0 }}
+      style={{ borderBottomColor: "var(--color-secondary)" }}
     >
       {/* 80vh dots */}
       <div className="relative h-[80vh] w-full overflow-hidden">
@@ -157,7 +172,7 @@ const Hero = () => {
            </div>
 
            {/* Simple description */}
-           <div className="absolute right-9 top-4 max-w-md">
+           <div className="absolute right-9 top-10 max-w-md">
              <p className="font-main text-sm font-normal leading-relaxed cursor-encapsulate" style={{ color: "var(--color-background)" }}>
                I'M AERON ALMENDRAS, A WEB DESIGNER AND DEVELOPER DEDICATED TO BUILDING MODERN, USER-FOCUSED WEBSITES THAT COMBINE CREATIVE DESIGN WITH FUNCTIONALITY.
              </p>
