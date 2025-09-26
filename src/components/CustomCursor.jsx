@@ -1,46 +1,85 @@
-import { motion, useMotionValue, useSpring } from "motion/react"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
+import { gsap } from "gsap"
 
-const CustomCursor = ({ inverted = false }) => {
-  // Custom cursor with motion values
-  const cursorX = useMotionValue(0)
-  const cursorY = useMotionValue(0)
-  const springX = useSpring(cursorX, { stiffness: 200, damping: 20 })
-  const springY = useSpring(cursorY, { stiffness: 200, damping: 20 })
+const CustomCursor = () => {
+  const cursorRef = useRef(null)
+  const mouse = useRef({ x: 0, y: 0 })
+  const pos = useRef({ x: 0, y: 0 })
+  const speed = 0.04 // balanced trailing speed
 
   useEffect(() => {
+    const cursor = cursorRef.current
+    gsap.set(cursor, { xPercent: -50, yPercent: -50 })
+
     const updateMousePosition = (e) => {
-      cursorX.set(e.clientX)
-      cursorY.set(e.clientY)
+      mouse.current.x = e.clientX
+      mouse.current.y = e.clientY
+
+      const elementAtCursor = document.elementFromPoint(e.clientX, e.clientY)
+
+      if (elementAtCursor) {
+        if (elementAtCursor.tagName === "A") {
+          gsap.to(cursor, {
+            backgroundColor: "var(--color-secondary)",
+            scale: 0.3,
+            duration: 0.3,
+          })
+        } else if (
+          elementAtCursor.tagName === "BUTTON" ||
+          elementAtCursor.classList.contains("cursor-pointer")
+        ) {
+          gsap.to(cursor, {
+            backgroundColor: "var(--color-primary)",
+            scale: 0.4,
+            duration: 0.3,
+          })
+        } else {
+          gsap.to(cursor, {
+            backgroundColor: "var(--color-background)",
+            scale: 1,
+            duration: 0.3,
+          })
+        }
+      }
     }
 
-    window.addEventListener('mousemove', updateMousePosition)
-    return () => window.removeEventListener('mousemove', updateMousePosition)
-  }, [cursorX, cursorY])
+    const updateCursor = () => {
+      // Smoother, balanced resistance
+      pos.current.x += (mouse.current.x - pos.current.x) * speed
+      pos.current.y += (mouse.current.y - pos.current.y) * speed
+
+      gsap.set(cursor, {
+        x: pos.current.x,
+        y: pos.current.y,
+      })
+
+      requestAnimationFrame(updateCursor)
+    }
+
+    window.addEventListener("mousemove", updateMousePosition)
+    updateCursor()
+
+    gsap.to(cursor, {
+      rotation: 360,
+      duration: 16,
+      repeat: -1,
+      ease: "linear",
+    })
+
+    return () => {
+      window.removeEventListener("mousemove", updateMousePosition)
+    }
+  }, [])
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 pointer-events-none z-50"
+    <div
+      ref={cursorRef}
+      className="fixed top-0 left-0 pointer-events-none z-50 w-8 h-8 rounded-full"
       style={{
-        x: springX,
-        y: springY,
+        backgroundColor: "var(--color-background)",
+        mixBlendMode: "difference",
       }}
-    >
-       <motion.div
-         className="w-4 h-4 rounded-full"
-         style={{
-           backgroundColor: inverted ? 'var(--color-primary)' : 'var(--color-background)',
-         }}
-         animate={{
-           scale: [1, 1.1, 1],
-         }}
-         transition={{
-           duration: 1.5,
-           repeat: Infinity,
-           ease: "easeInOut"
-         }}
-       />
-    </motion.div>
+    />
   )
 }
 
