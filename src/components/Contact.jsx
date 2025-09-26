@@ -3,6 +3,8 @@ import { gsap } from 'gsap'
 
 const Contact = () => {
   const sectionRef = useRef(null)
+  const headerRef = useRef(null)
+  const originalText = "GET IN TOUCH ↗"
 
   useEffect(() => {
     if (sectionRef.current) {
@@ -17,6 +19,44 @@ const Contact = () => {
         ease: "power2.out", 
         delay: 0.6 
       })
+    }
+
+    const header = headerRef.current
+    if (header) {
+      const chars = "!@#$%^&*()_+{}[]<>?/abcdefghijklmnopqrstuvwxyz".split("")
+      let interval
+
+      const shuffleText = () => {
+        let i = 0
+        interval = setInterval(() => {
+          const scrambled = originalText
+            .split("")
+            .map((char, idx) => {
+              if (char === " ") return " " // keep spaces
+              return idx < i ? originalText[idx] : chars[Math.floor(Math.random() * chars.length)]
+            })
+            .join("")
+          header.textContent = scrambled
+
+          if (i >= originalText.length) {
+            clearInterval(interval)
+            header.textContent = originalText
+          }
+          i++
+        }, 50) // speed of shuffle
+      }
+
+      header.addEventListener("mouseenter", shuffleText)
+      header.addEventListener("mouseleave", () => {
+        clearInterval(interval)
+        header.textContent = originalText
+      })
+
+      return () => {
+        clearInterval(interval)
+        header.removeEventListener("mouseenter", shuffleText)
+        header.removeEventListener("mouseleave", () => {})
+      }
     }
   }, [])
 
@@ -33,8 +73,12 @@ const Contact = () => {
         {/* Left side - Title */}
         <div className="w-1/2 flex items-start justify-start">
           <div className="flex items-center">
-            <h2 className="font-main text-6xl font-medium" style={{ color: 'var(--color-background)' }}>
-              GET IN TOUCH&nbsp;↗
+            <h2 
+              ref={headerRef}
+              className="font-main text-6xl font-medium"
+              style={{ color: 'var(--color-background)', cursor: 'pointer' }}
+            >
+              GET IN TOUCH ↗
             </h2>
           </div>
         </div>

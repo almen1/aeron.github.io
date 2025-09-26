@@ -3,6 +3,8 @@ import { gsap } from 'gsap'
 
 const Works = () => {
   const sectionRef = useRef(null)
+  const headerRef = useRef(null)
+  const originalText = "FEATURED WORK ↗"
 
   useEffect(() => {
     if (sectionRef.current) {
@@ -17,6 +19,44 @@ const Works = () => {
         ease: "power2.out", 
         delay: 0.5 
       })
+    }
+
+    const header = headerRef.current
+    if (header) {
+      const chars = "!@#$%^&*()_+{}[]<>?/abcdefghijklmnopqrstuvwxyz".split("")
+      let interval
+
+      const shuffleText = () => {
+        let i = 0
+        interval = setInterval(() => {
+          const scrambled = originalText
+            .split("")
+            .map((char, idx) => {
+              if (char === " ") return " " // keep spaces
+              return idx < i ? originalText[idx] : chars[Math.floor(Math.random() * chars.length)]
+            })
+            .join("")
+          header.textContent = scrambled
+
+          if (i >= originalText.length) {
+            clearInterval(interval)
+            header.textContent = originalText
+          }
+          i++
+        }, 50) // speed of shuffle
+      }
+
+      header.addEventListener("mouseenter", shuffleText)
+      header.addEventListener("mouseleave", () => {
+        clearInterval(interval)
+        header.textContent = originalText
+      })
+
+      return () => {
+        clearInterval(interval)
+        header.removeEventListener("mouseenter", shuffleText)
+        header.removeEventListener("mouseleave", () => {})
+      }
     }
   }, [])
 
@@ -33,8 +73,12 @@ const Works = () => {
         {/* Title */}
         <div className="w-full flex items-start justify-start mb-12">
           <div className="flex items-center">
-            <h2 className="font-main text-6xl font-medium" style={{ color: 'var(--color-background)' }}>
-              FEATURED WORK&nbsp;↗
+            <h2 
+              ref={headerRef}
+              className="font-main text-6xl font-medium"
+              style={{ color: 'var(--color-background)', cursor: 'pointer' }}
+            >
+              FEATURED WORK ↗
             </h2>
           </div>
         </div>

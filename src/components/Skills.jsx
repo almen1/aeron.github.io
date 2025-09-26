@@ -155,6 +155,8 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
 const Skills = () => {
   const [hoveredSkill, setHoveredSkill] = useState(null)
   const sectionRef = useRef(null)
+  const headerRef = useRef(null)
+  const originalText = "MY EXPERTISE ↗"
 
   useEffect(() => {
     if (sectionRef.current) {
@@ -170,6 +172,44 @@ const Skills = () => {
         delay: 0.4 
       })
     }
+
+    const header = headerRef.current
+    if (header) {
+      const chars = "!@#$%^&*()_+{}[]<>?/abcdefghijklmnopqrstuvwxyz".split("")
+      let interval
+
+      const shuffleText = () => {
+        let i = 0
+        interval = setInterval(() => {
+          const scrambled = originalText
+            .split("")
+            .map((char, idx) => {
+              if (char === " ") return " " // keep spaces
+              return idx < i ? originalText[idx] : chars[Math.floor(Math.random() * chars.length)]
+            })
+            .join("")
+          header.textContent = scrambled
+
+          if (i >= originalText.length) {
+            clearInterval(interval)
+            header.textContent = originalText
+          }
+          i++
+        }, 50) // speed of shuffle
+      }
+
+      header.addEventListener("mouseenter", shuffleText)
+      header.addEventListener("mouseleave", () => {
+        clearInterval(interval)
+        header.textContent = originalText
+      })
+
+      return () => {
+        clearInterval(interval)
+        header.removeEventListener("mouseenter", shuffleText)
+        header.removeEventListener("mouseleave", () => {})
+      }
+    }
   }, [])
 
   return (
@@ -184,8 +224,12 @@ const Skills = () => {
       {/* ROW 1 */}
       <div className="h-[30vh] flex border-b" style={{ borderBottomColor: 'var(--color-secondary)' }}>
         <div className="w-1/2 flex items-start justify-start py-8 px-9 h-auto">
-          <h2 className="font-main text-6xl font-medium" style={{ color: 'var(--color-background)' }}>
-            MY EXPERTISE&nbsp;↗
+          <h2 
+            ref={headerRef}
+            className="font-main text-6xl font-medium"
+            style={{ color: 'var(--color-background)', cursor: 'pointer' }}
+          >
+            MY EXPERTISE ↗
           </h2>
         </div>
         <SkillItem title="Web Development" borderLeft hoveredSkill={hoveredSkill} setHoveredSkill={setHoveredSkill} />
