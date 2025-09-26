@@ -154,8 +154,8 @@ const Hero = () => {
           <div className="w-[66%] flex justify-start">
             <h1
               ref={roleRef}
-              className="font-main text-8xl md:text-[150px] font-bold cursor-enlarge"
-              style={{ color: "var(--color-background)" }}
+              className="font-main text-8xl md:text-[150px] font-bold cursor-enlarge text-neutral-500"
+              // style={{ color: "var(--color-background)" }}
             >
               {roles[roleIndex]}
             </h1>
