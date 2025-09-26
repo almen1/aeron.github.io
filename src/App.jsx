@@ -30,7 +30,7 @@ function App() {
           <Navbar />
           
           <div 
-            className="w-screen min-h-screen pt-20"
+            className="w-screen min-h-screen"
             style={{ backgroundColor: 'var(--color-primary)' }}
           >
             <Hero />

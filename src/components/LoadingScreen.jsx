@@ -74,9 +74,9 @@ const LoadingScreen = ({ onComplete }) => {
               : [0.43, 0.195, 0.02, 1]
             }}
               style={{
-                color: currentIndex === helloWords.length - 1 ? 'var(--color-primary)' : 'var(--color-secondary)'
+                color: currentIndex === helloWords.length - 1 ? 'var(--color-primary)' : 'var(--color-primary)'
               }}
-            className="text-6xl font-bold font-main"
+            className="text-8xl font-bold font-main"
           >
             {helloWords[currentIndex]}
           </motion.div>
