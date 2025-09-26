@@ -150,7 +150,7 @@ const Hero = () => {
         <div className="flex w-full max-w-6xl">
           <div className="flex w-full max-w-6xl justify-start px-9 py-4">
             <h1
-              className="font-main text-[64px] md:text-[120px] font-norma"
+              className="font-main text-[64px] md:text-[120px] font-normal"
               style={{ color: "var(--color-background)" }}
             >
               <span ref={webRef}>WEB&nbsp;</span>

@@ -35,8 +35,8 @@ function App() {
           >
             <Hero />
             {/* <About /> */}
-            {/* <Skills /> */}
-            <Marquee />
+            <Skills />
+            {/* <Marquee /> */}
             <Works />
             
             <Contact />
