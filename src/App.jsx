@@ -20,27 +20,22 @@ function App() {
       
       <motion.div 
         className="bg-black w-screen min-h-screen"
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 1 }}
         animate={{ 
-          opacity: isLoading ? 0 : 1
-        }}
-        transition={{ 
-          duration: 1.5,
-          ease: "easeInOut",
-          delay: isLoading ? 0 : 0.3
+          opacity: 1
         }}
       >
         <motion.div 
-          className="p-8"
+          className=""
           initial={{ y: 50, opacity: 0 }}
           animate={{ 
             y: isLoading ? 50 : 0,
             opacity: isLoading ? 0 : 1
           }}
           transition={{ 
-            duration: 1.0,
+            duration: 1,
             ease: "easeOut",
-            delay: isLoading ? 0 : 0.8
+            delay: isLoading ? 0 : 0.5
           }}
         >
           <h1 className='text-white text-4xl font-bold'>Hello World</h1>

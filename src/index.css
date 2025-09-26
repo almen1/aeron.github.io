@@ -7,6 +7,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Hide scrollbars but keep scroll functionality */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
 #root {
   margin: auto;
 }
