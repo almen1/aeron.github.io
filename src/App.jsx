@@ -35,9 +35,10 @@ function App() {
           >
             <Hero />
             {/* <About /> */}
-            <Skills />
+            {/* <Skills /> */}
+            <Marquee />
             <Works />
-            {/* <Marquee /> */}
+            
             <Contact />
           </div>
           
