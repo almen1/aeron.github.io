@@ -1,19 +1,23 @@
 import React from 'react'
+import { motion } from "motion/react"
 
 const footer = () => {
   return (
-    <footer 
-      className="w-full fixed bottom-0 left-0 right-0 py-3 px-9"
+    <motion.footer 
+      className="w-full"
       style={{ 
         backgroundColor: 'var(--color-primary)'
       }}
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      <div className="text-center text-sm font-light">
+      <div className="px-9 py-4 text-center text-sm font-light">
         <p className="font-main text-background">
           DESIGNED BY AERON&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;MADE WITH REACT&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;BASED IN THE PHILIPPINES
         </p>
       </div>
-    </footer>
+    </motion.footer>
   )
 }
 

@@ -4,6 +4,12 @@ import './App.css'
 import LoadingScreen from './components/LoadingScreen'
 import Navbar from './components/navbar'
 import Footer from './components/footer'
+import CustomCursor from './components/CustomCursor'
+import Hero from './components/Hero'
+import About from './components/About'
+import Skills from './components/Skills'
+import Works from './components/Works'
+import Contact from './components/Contact'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -24,39 +30,23 @@ function App() {
         <>
           <Navbar />
           
-          <motion.div 
-            className="w-screen min-h-screen pt-20 pb-16"
+          <div 
+            className="w-screen min-h-screen pt-20"
             style={{ backgroundColor: 'var(--color-primary)' }}
-            initial={{ opacity: 1 }}
-            animate={{ 
-              opacity: 1
-            }}
           >
-            <motion.div 
-              className=""
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ 
-                y: 0,
-                opacity: 1
-              }}
-              transition={{ 
-                duration: 1,
-                ease: "easeOut",
-                delay: 0.3
-              }}
-            >
-              <h1 
-                className='text-4xl font-bold font-main'
-                style={{ color: 'var(--color-background)' }}
-              >
-                Hello World
-              </h1>
-            </motion.div>
-          </motion.div>
+            <Hero />
+            <About />
+            <Skills />
+            <Works />
+            <Contact />
+          </div>
           
           <Footer />
         </>
       )}
+
+      {/* Custom Cursor */}
+      {!isLoading && <CustomCursor />}
     </>
   )
 }

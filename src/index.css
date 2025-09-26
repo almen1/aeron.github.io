@@ -106,3 +106,8 @@
 @utility text-background {
   color: var(--color-background);
 }
+
+/* Hide default cursor only on specific elements */
+button, a, input, textarea, select {
+  cursor: none !important;
+}

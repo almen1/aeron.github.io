@@ -1,15 +1,20 @@
 import React from 'react'
+import { motion } from "motion/react"
 
 const navbar = () => {
     return (
-        <nav className="w-full fixed top-0 left-0 right-0 z-50 border-b h-auto inline-flex"
+        <motion.nav 
+            className="w-full fixed top-0 left-0 right-0 z-50 border-b h-auto inline-flex"
             style={{
                 backgroundColor: 'var(--color-primary)',
                 color: 'var(--color-background)',
                 borderBottomColor: 'var(--color-secondary)',
             }}
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
         >
-            <div className="flex items-center px-9 py-3">
+            <div className="flex items-center px-9 py-4">
                 <div className="font-main">iamaeron®</div>
                 <div className="ml-4 h-px w-[500px]" style={{ backgroundColor: 'var(--color-background)' }}></div>
             </div>
@@ -33,8 +38,7 @@ const navbar = () => {
                     MENU
                 </button>
             </div>
-        </nav>
-
+        </motion.nav>
     )
 }
 
