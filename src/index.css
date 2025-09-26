@@ -5,6 +5,31 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* Color Palette - Dark Theme (Default) */
+  --color-primary: #000000; /* main surface */
+  --color-secondary: #515151; /* muted text */
+  --color-background: #FEFAF6; /* main text */
+  --color-text-muted: #D6D2CD; /* lighter muted */
+  
+  /* OKLCH equivalents */
+  --color-primary-oklch: oklch(0% 0 0); /* main surface */
+  --color-secondary-oklch: oklch(35% 0 0); /* muted text */
+  --color-background-oklch: oklch(98% 0.01 85); /* main text */
+  --color-text-muted-oklch: oklch(85% 0.01 85); /* lighter muted */
+}
+
+/* Light Theme Example */
+[data-theme="light"] {
+  --color-primary: #FEFAF6; /* main surface */
+  --color-secondary: #D6D2CD; /* muted text */
+  --color-background: #000000; /* main text */
+  --color-text-muted: #515151; /* lighter muted */
+  
+  --color-primary-oklch: oklch(98% 0.01 85); /* main surface */
+  --color-secondary-oklch: oklch(85% 0.01 85); /* muted text */
+  --color-background-oklch: oklch(0% 0 0); /* main text */
+  --color-text-muted-oklch: oklch(35% 0 0); /* lighter muted */
 }
 
 /* Hide scrollbars but keep scroll functionality */

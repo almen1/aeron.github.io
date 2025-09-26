@@ -19,7 +19,8 @@ function App() {
       </AnimatePresence>
       
       <motion.div 
-        className="bg-black w-screen min-h-screen"
+        className="w-screen min-h-screen"
+        style={{ backgroundColor: 'var(--color-primary)' }}
         initial={{ opacity: 1 }}
         animate={{ 
           opacity: 1
@@ -38,7 +39,12 @@ function App() {
             delay: isLoading ? 0 : 0.5
           }}
         >
-          <h1 className='text-white text-4xl font-bold'>Hello World</h1>
+          <h1 
+            className='text-4xl font-bold'
+            style={{ color: 'var(--color-background)' }}
+          >
+            Hello World
+          </h1>
         </motion.div>
       </motion.div>
     </>

@@ -24,7 +24,6 @@ const LoadingScreen = ({ onComplete }) => {
   ]
 
   useEffect(() => {
-    // Small delay to ensure first word animates in
     const initialTimer = setTimeout(() => {
       const timer = setInterval(() => {
         setCurrentIndex((prev) => {
@@ -39,7 +38,7 @@ const LoadingScreen = ({ onComplete }) => {
       }, 600)
 
       return () => clearInterval(timer)
-    }, 100) // 100ms delay for first word animation
+    }, 100)
 
     return () => clearTimeout(initialTimer)
   }, [])
@@ -48,7 +47,7 @@ const LoadingScreen = ({ onComplete }) => {
     if (showKumusta) {
       const zoomTimer = setTimeout(() => {
         setIsZooming(true)
-      }, 800)
+      }, 600)
 
       const completeTimer = setTimeout(() => {
         onComplete()
@@ -63,7 +62,8 @@ const LoadingScreen = ({ onComplete }) => {
 
   return (
     <motion.div
-      className="fixed inset-0 w-screen h-screen bg-white overflow-hidden flex items-center justify-center z-50"
+      className="fixed inset-0 w-screen h-screen overflow-hidden flex items-center justify-center z-50"
+      style={{ backgroundColor: 'var(--color-background)' }}
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, scale: 1.1 }}
       transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
@@ -83,9 +83,10 @@ const LoadingScreen = ({ onComplete }) => {
               duration: showKumusta && isZooming ? 1.5 : 0.3,
               ease: showKumusta && isZooming ? [0.43, 0.195, 0.02, 1] : [0.25, 0.46, 0.45, 0.94]
             }}
-            className={`text-6xl font-bold ${
-              currentIndex === helloWords.length - 1 ? 'text-black' : 'text-neutral-500'
-            }`}
+              style={{
+                color: currentIndex === helloWords.length - 1 ? 'var(--color-primary)' : 'var(--color-secondary)'
+              }}
+            className="text-6xl font-bold"
           >
             {helloWords[currentIndex]}
           </motion.div>
