@@ -1,1 +1,62 @@
 @import "tailwindcss";
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  margin: auto;
+}
+
+/* Custom animations for loading screen */
+@keyframes word-slide-in {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes mega-zoom {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(15);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(25);
+    opacity: 0;
+  }
+}
+
+@keyframes smooth-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@utility word-slide-in {
+  animation: word-slide-in 0.3s ease-out;
+}
+
+@utility mega-zoom {
+  animation: mega-zoom 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@utility smooth-fade-in {
+  animation: smooth-fade-in 0.8s ease-out;
+}
