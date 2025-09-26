@@ -131,7 +131,7 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
             }
           }
         }}
-        className="absolute bottom-4 left-4 max-w-[200px] grid grid-cols-1 gap-2"
+        className="absolute bottom-4 left-4 max-w-[200px] grid grid-cols-1 gap-4 gap-x-8"
         style={{
           gridTemplateColumns: skillsData[title]?.length > 6 ? 'repeat(2, minmax(0, 1fr))' : '1fr'
         }}
