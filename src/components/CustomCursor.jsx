@@ -18,11 +18,21 @@ const CustomCursor = () => {
       const elementAtCursor = document.elementFromPoint(e.clientX, e.clientY)
 
       if (elementAtCursor) {
-        // Check if hovering over section headings with cursor-enlarge class
+        // Check for cursor-enlarge class (2.2x scale)
         if (elementAtCursor.classList.contains('cursor-enlarge')) {
           gsap.to(cursor, {
             backgroundColor: "#ffffff",
-            scale: 2.2,
+            scale: 2.5,
+            mixBlendMode: "difference",
+            duration: 0.4,
+            ease: "power2.out"
+          })
+        } 
+        // Check for cursor-encapsulate class (15x scale - covers text)
+        else if (elementAtCursor.classList.contains('cursor-encapsulate')) {
+          gsap.to(cursor, {
+            backgroundColor: "#ffffff",
+            scale: 15.0,
             mixBlendMode: "difference",
             duration: 0.4,
             ease: "power2.out"

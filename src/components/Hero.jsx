@@ -1,51 +1,81 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef } from "react"
 import { gsap } from "gsap"
+import { TextPlugin } from "gsap/TextPlugin"
+
+gsap.registerPlugin(TextPlugin)
 
 const Hero = () => {
   const sectionRef = useRef(null)
   const canvasRef = useRef(null)
   const roleRef = useRef(null)
+  const scrollRef = useRef(null)
+  const webRef = useRef(null)
+  const subtextRef = useRef(null)
 
   const roles = ["DEVELOPER", "DESIGNER"]
-  const [roleIndex, setRoleIndex] = useState(0)
-
-  const mouse = useRef({ x: -9999, y: -9999 }) // start offscreen
+  const mouse = useRef({ x: -9999, y: -9999 })
   const dimensionsRef = useRef({ w: 0, h: 0 })
-  const dotsRef = useRef([]) // precomputed grid dots
+  const dotsRef = useRef([])
 
-  // Fade-in hero
+  // Hero reveal animations
   useEffect(() => {
-    if (sectionRef.current) {
-      gsap.fromTo(
-        sectionRef.current,
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.2 }
+    const tl = gsap.timeline({ delay: 0.2 })
+
+    tl.fromTo(
+      sectionRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.6, ease: "power2.out" }
+    )
+      .fromTo(
+        webRef.current,
+        { y: 80, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+        "-=0.2"
       )
+      .fromTo(
+        roleRef.current,
+        { y: 80, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+        "-=0.4"
+      )
+      .fromTo(
+        subtextRef.current,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+        "-=0.3"
+      )
+  }, [])
+
+  // Cycle roles with GSAP TextPlugin
+  useEffect(() => {
+    let i = 0
+    const cycle = () => {
+      gsap.to(roleRef.current, {
+        duration: 1,
+        text: roles[i % roles.length],
+        ease: "power2.inOut",
+      })
+      i++
+    }
+    cycle()
+    const interval = setInterval(cycle, 3000)
+    return () => clearInterval(interval)
+  }, [])
+
+  // Scroll down animation
+  useEffect(() => {
+    if (scrollRef.current) {
+      gsap.to(scrollRef.current, {
+        y: 15,
+        repeat: -1,
+        yoyo: true,
+        duration: 1.2,
+        ease: "power1.inOut",
+      })
     }
   }, [])
 
-  // Cycle roles
-  useEffect(() => {
-    const interval = setInterval(() => {
-      gsap.to(roleRef.current, {
-        y: 20,
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.in",
-        onComplete: () => {
-          setRoleIndex((prev) => (prev + 1) % roles.length)
-          gsap.fromTo(
-            roleRef.current,
-            { y: -20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.3, ease: "power2.out" }
-          )
-        },
-      })
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [roles.length])
-
-  // Setup canvas once
+  // Canvas background (untouched)
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d")
@@ -138,12 +168,13 @@ const Hero = () => {
       />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center justify-center">
+      <div className="relative z-10 h-full flex flex-col items-center justify-center">
         <div className="flex w-full max-w-6xl">
           {/* Left column for WEB */}
-          <div className="w-[34%] flex justify-end">
+          <div className="w-[31%] flex justify-end">
             <h1
-              className="font-main text-8xl md:text-[150px] font-bold cursor-enlarge"
+              ref={webRef}
+              className="font-main text-8xl md:text-[150px] font-bold"
               style={{ color: "var(--color-background)" }}
             >
               WEB&nbsp;
@@ -151,16 +182,28 @@ const Hero = () => {
           </div>
 
           {/* Right column for cycling role */}
-          <div className="w-[66%] flex justify-start">
+          <div className="w-[69%] flex justify-start">
             <h1
               ref={roleRef}
-              className="font-main text-8xl md:text-[150px] font-bold cursor-enlarge"
+              className="font-main text-8xl md:text-[150px] font-bold"
               style={{ color: "var(--color-background)" }}
-            >
-              {roles[roleIndex]}
-            </h1>
+            />
           </div>
         </div>
+      </div>
+
+      {/* Scroll down animation */}
+      <div
+        ref={scrollRef}
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2"
+      >
+        <span
+          className="block w-6 h-6 border-l-2 border-b-2"
+          style={{
+            borderColor: "var(--color-background)",
+            transform: "rotate(-45deg)",
+          }}
+        />
       </div>
     </section>
   )

@@ -7,6 +7,7 @@ gsap.registerPlugin(TextPlugin)
 const About = () => {
   const sectionRef = useRef(null)
   const headerRef = useRef(null)
+  const descriptionRef = useRef(null)
   const originalText = "ABOUT MYSELF ↗"
 
   useEffect(() => {
@@ -59,6 +60,34 @@ const About = () => {
         header.removeEventListener("mouseleave", () => {})
       }
     }
+
+    // Cursor enlargement for description
+    const description = descriptionRef.current
+    if (description) {
+      const handleMouseEnter = () => {
+        gsap.to(description, {
+          scale: 10.0,
+          duration: 0.4,
+          ease: "power2.out"
+        })
+      }
+
+      const handleMouseLeave = () => {
+        gsap.to(description, {
+          scale: 1,
+          duration: 0.4,
+          ease: "power2.out"
+        })
+      }
+
+      description.addEventListener("mouseenter", handleMouseEnter)
+      description.addEventListener("mouseleave", handleMouseLeave)
+
+      return () => {
+        description.removeEventListener("mouseenter", handleMouseEnter)
+        description.removeEventListener("mouseleave", handleMouseLeave)
+      }
+    }
   }, [])
 
   return (
@@ -85,10 +114,13 @@ const About = () => {
         </div>
 
         {/* Right side - Description */}
-        <div className="w-1/2 flex items-start justify-start">
-          <p className="font-main text-4xl font-semibold leading-tight tracking-wider" style={{ color: 'var(--color-secondary)' }}>
-            I'm Aeron Almendras, a passionate web designer and developer who creates visually striking, user-focused websites. I love transforming creative ideas into engaging digital experiences that seamlessly blend beautiful design with powerful functionality.
-          </p>
+        <div className="w-1/2 flex items-end justify-start">
+          <p 
+            ref={descriptionRef}
+            className="font-main text-5xl font-medium leading-tight tracking-wider cursor-encapsulate text-neutral-500" 
+            // style={{ color: 'var(--color-secondary)' }}
+          >
+I’M AERON ALMENDRAS, A WEB DESIGNER AND DEVELOPER DEDICATED TO BUILDING MODERN, USER-FOCUSED WEBSITES THAT COMBINE CREATIVE DESIGN WITH FUNCTIONALITY.          </p>
         </div>
       </div>
     </section>

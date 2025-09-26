@@ -97,7 +97,7 @@ const Contact = () => {
             onMouseEnter={(e) => e.target.style.color = 'var(--color-background)'}
             onMouseLeave={(e) => e.target.style.color = 'var(--color-secondary)'}
           >
-            GitHub
+            GITHUB
             <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">↗</span>
           </a>
           <a 
@@ -112,7 +112,7 @@ const Contact = () => {
             onMouseEnter={(e) => e.target.style.color = 'var(--color-background)'}
             onMouseLeave={(e) => e.target.style.color = 'var(--color-secondary)'}
           >
-            LinkedIn
+            LINKEDIN
             <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">↗</span>
           </a>
           <a 
@@ -125,7 +125,7 @@ const Contact = () => {
             onMouseEnter={(e) => e.target.style.color = 'var(--color-background)'}
             onMouseLeave={(e) => e.target.style.color = 'var(--color-secondary)'}
           >
-            Email
+            EMAIL
             <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">↗</span>
           </a>
         </div>

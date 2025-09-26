@@ -52,7 +52,6 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
 
   const handleMouseEnter = () => {
     setHoveredSkill(title)
-    // Copy the exact MY EXPERTISE effect
     if (titleRef.current) {
       const chars = "!@#$%^&*()_+{}[]<>?/abcdefghijklmnopqrstuvwxyz".split("")
       let interval
@@ -60,21 +59,21 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
       const shuffleText = () => {
         let i = 0
         interval = setInterval(() => {
-          const scrambled = title
+          const scrambled = title.toUpperCase()
             .split("")
             .map((char, idx) => {
-              if (char === " ") return " " // keep spaces
-              return idx < i ? title[idx] : chars[Math.floor(Math.random() * chars.length)]
+              if (char === " ") return " "
+              return idx < i ? title.toUpperCase()[idx] : chars[Math.floor(Math.random() * chars.length)]
             })
             .join("")
           titleRef.current.textContent = scrambled
 
           if (i >= title.length) {
             clearInterval(interval)
-            titleRef.current.textContent = title
+            titleRef.current.textContent = title.toUpperCase()
           }
           i++
-        }, 50) // speed of shuffle
+        }, 50)
       }
 
       shuffleText()
@@ -83,9 +82,8 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
 
   const handleMouseLeave = () => {
     setHoveredSkill(null)
-    // Reset title text back to original
     if (titleRef.current) {
-      titleRef.current.textContent = title
+      titleRef.current.textContent = title.toUpperCase()
     }
   }
 
@@ -104,7 +102,7 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
       <div className="flex items-center justify-between w-full">
         <h3
           ref={titleRef}
-          className="font-main text-2xl font-semibold transition-colors duration-500"
+          className="font-main text-xl font-normal transition-colors duration-500 uppercase"
           style={{
             color: isHovered ? 'var(--color-primary)' : 'var(--color-background)'
           }}
@@ -120,7 +118,7 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
         ></div>
       </div>
 
-      {/* Stack Reveal - Top Right */}
+      {/* Stack Reveal */}
       <div
         ref={el => {
           if (el) {
@@ -132,68 +130,29 @@ const SkillItem = ({ title, borderLeft, hoveredSkill, setHoveredSkill }) => {
             }
           }
         }}
-        className="absolute bottom-4 left-4 flex items-end text-right max-w-[200px]"
+        className="absolute bottom-4 left-4 max-w-[200px] grid grid-cols-1 gap-2"
+        style={{
+          gridTemplateColumns: skillsData[title]?.length > 6 ? 'repeat(2, minmax(0, 1fr))' : '1fr'
+        }}
       >
-        {title === "Web Development" ? (
-          <div className="flex gap-8">
-            <div className="flex flex-col">
-              {skillsData[title]?.slice(0, Math.ceil(skillsData[title].length / 2)).map((stack, idx) => (
-                <div key={idx} className="flex items-center gap-1">
-                  <img 
-                    src={skillIcons[stack]} 
-                    alt={stack}
-                    className="w-3.5 h-3.5"
-                    style={{ filter: 'brightness(0) saturate(100%) invert(35%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)' }}
-                  />
-                  <span
-                    className="text-sm font-medium uppercase tracking-wide leading-tight"
-                    style={{ color: 'var(--color-secondary)' }}
-                  >
-                    {stack}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col">
-              {skillsData[title]?.slice(Math.ceil(skillsData[title].length / 2)).map((stack, idx) => (
-                <div key={idx} className="flex items-center gap-1">
-                  <img 
-                    src={skillIcons[stack]} 
-                    alt={stack}
-                    className="w-3.5 h-3.5"
-                    style={{ filter: 'brightness(0) saturate(100%) invert(35%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)' }}
-                  />
-                  <span
-                    className="text-sm font-medium uppercase tracking-wide leading-tight"
-                    style={{ color: 'var(--color-secondary)' }}
-                  >
-                    {stack}
-                  </span>
-                </div>
-              ))}
-            </div>
+        {skillsData[title]?.map((stack, idx) => (
+          <div key={idx} className="flex items-center gap-1">
+            <img
+              src={skillIcons[stack]}
+              alt={stack}
+              className="w-3.5 h-3.5"
+              style={{ filter: 'brightness(0) saturate(100%) invert(35%)' }}
+            />
+            <span
+              className="text-sm font-medium uppercase tracking-wide leading-tight"
+              style={{ color: 'var(--color-secondary)' }}
+            >
+              {stack}
+            </span>
           </div>
-        ) : (
-          <div className="flex flex-col">
-            {skillsData[title]?.map((stack, idx) => (
-              <div key={idx} className="flex items-center gap-1">
-                <img 
-                  src={skillIcons[stack]} 
-                  alt={stack}
-                  className="w-3.5 h-3.5"
-                  style={{ filter: 'brightness(0) saturate(100%) invert(35%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)' }}
-                />
-                <span
-                  className="text-sm font-medium uppercase tracking-wide leading-tight"
-                  style={{ color: 'var(--color-secondary)' }}
-                >
-                  {stack}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
+        ))}
       </div>
+
     </div>
   )
 }
@@ -206,16 +165,13 @@ const Skills = () => {
 
   useEffect(() => {
     if (sectionRef.current) {
-      // Set initial state immediately to prevent flash
       gsap.set(sectionRef.current, { y: 50, opacity: 0 })
-      
-      // Then animate
-      gsap.to(sectionRef.current, { 
-        y: 0, 
-        opacity: 1, 
-        duration: 0.8, 
-        ease: "power2.out", 
-        delay: 0.4 
+      gsap.to(sectionRef.current, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        delay: 0.4
       })
     }
 
@@ -230,7 +186,7 @@ const Skills = () => {
           const scrambled = originalText
             .split("")
             .map((char, idx) => {
-              if (char === " ") return " " // keep spaces
+              if (char === " ") return " "
               return idx < i ? originalText[idx] : chars[Math.floor(Math.random() * chars.length)]
             })
             .join("")
@@ -241,7 +197,7 @@ const Skills = () => {
             header.textContent = originalText
           }
           i++
-        }, 50) // speed of shuffle
+        }, 50)
       }
 
       header.addEventListener("mouseenter", shuffleText)
@@ -253,7 +209,7 @@ const Skills = () => {
       return () => {
         clearInterval(interval)
         header.removeEventListener("mouseenter", shuffleText)
-        header.removeEventListener("mouseleave", () => {})
+        header.removeEventListener("mouseleave", () => { })
       }
     }
   }, [])
@@ -262,20 +218,20 @@ const Skills = () => {
     <section
       ref={sectionRef}
       className="h-fit border-b"
-      style={{ 
+      style={{
         borderBottomColor: 'var(--color-secondary)',
-        opacity: 0 // Initial CSS opacity to prevent flash
+        opacity: 0
       }}
     >
       {/* ROW 1 */}
       <div className="h-[30vh] flex border-b" style={{ borderBottomColor: 'var(--color-secondary)' }}>
         <div className="w-1/2 flex items-start justify-start py-8 px-9 h-auto">
-          <h2 
+          <h2
             ref={headerRef}
-            className="font-main text-6xl font-medium cursor-enlarge"
+            className="font-main text-6xl font-medium cursor-enlarge uppercase"
             style={{ color: 'var(--color-background)', cursor: 'pointer' }}
           >
-            MY EXPERTISE ↗
+            {originalText}
           </h2>
         </div>
         <SkillItem title="Web Development" borderLeft hoveredSkill={hoveredSkill} setHoveredSkill={setHoveredSkill} />
