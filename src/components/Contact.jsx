@@ -63,19 +63,19 @@ const Contact = () => {
   return (
     <section 
       ref={sectionRef}
-      className="h-fit border-b px-9"
+      className="h-fit border-b px-4 md:px-9"
       style={{ 
         borderBottomColor: 'var(--color-secondary)',
         opacity: 0 // Initial CSS opacity to prevent flash
       }}
     >
-      <div className="h-full flex pt-8 pb-32">
+      <div className="h-full flex flex-col md:flex-row pt-8 pb-32">
         {/* Left side - Title */}
-        <div className="w-1/2 flex items-start justify-start">
+        <div className="w-full md:w-1/2 flex items-start justify-start mb-8 md:mb-0">
           <div className="flex items-center">
             <h2 
               ref={headerRef}
-              className="font-main text-6xl font-medium cursor-enlarge"
+              className="font-main text-3xl md:text-6xl font-medium cursor-enlarge"
               style={{ color: 'var(--color-background)', cursor: 'pointer' }}
             >
               GET IN TOUCH ↗
@@ -84,12 +84,12 @@ const Contact = () => {
         </div>
 
         {/* Right side - Links */}
-        <div className="w-1/2 flex flex-col items-start justify-start">
+        <div className="w-full md:w-1/2 flex flex-col items-start justify-start">
           <a 
             href="https://github.com/almen1" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="group flex items-center justify-between w-full py-4 border-b text-4xl font-main font-extralight transition-all duration-300"
+            className="group flex items-center justify-between w-full py-4 border-b text-2xl md:text-4xl font-main font-extralight transition-all duration-300"
             style={{ 
               color: 'var(--color-secondary)',
               borderColor: 'var(--color-secondary)'
@@ -104,7 +104,7 @@ const Contact = () => {
             href="https://linkedin.com/in/aeron-almendras" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="group flex items-center justify-between w-full py-4 border-b text-4xl font-main font-extralight transition-all duration-300"
+            className="group flex items-center justify-between w-full py-4 border-b text-2xl md:text-4xl font-main font-extralight transition-all duration-300"
             style={{ 
               color: 'var(--color-secondary)',
               borderColor: 'var(--color-secondary)'
@@ -117,7 +117,7 @@ const Contact = () => {
           </a>
           <a 
             href="mailto:aeronalmendras@gmail.com" 
-            className="group flex items-center justify-between w-full py-4 border-b text-4xl font-main font-extralight transition-all duration-300"
+            className="group flex items-center justify-between w-full py-4 border-b text-2xl md:text-4xl font-main font-extralight transition-all duration-300"
             style={{ 
               color: 'var(--color-secondary)',
               borderColor: 'var(--color-secondary)'

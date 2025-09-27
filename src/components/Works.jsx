@@ -63,7 +63,7 @@ const Works = () => {
   return (
     <section 
       ref={sectionRef}
-      className="h-fit border-b px-9"
+      className="h-fit border-b px-4 md:px-9"
       style={{ 
         borderBottomColor: 'var(--color-secondary)',
         backgroundColor: 'var(--color-primary)',
@@ -76,7 +76,7 @@ const Works = () => {
           <div className="flex items-center">
             <h2 
               ref={headerRef}
-              className="font-main text-6xl font-medium cursor-enlarge"
+              className="font-main text-3xl md:text-6xl font-medium cursor-enlarge"
               style={{ color: 'var(--color-background)', cursor: 'pointer' }}
             >
               FEATURED WORK ↗
@@ -86,7 +86,7 @@ const Works = () => {
 
         {/* Projects Grid - Full Width */}
         <div className="w-full flex flex-col items-start justify-start">
-          <div className="grid grid-cols-2 gap-6 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full">
             {/* Project 1 */}
             <div className="group cursor-pointer">
               <div className="w-full aspect-video mb-2 rounded-sm transition-all duration-300 group-hover:opacity-80" style={{ backgroundColor: 'var(--color-secondary)' }}></div>

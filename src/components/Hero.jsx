@@ -148,9 +148,9 @@ const Hero = () => {
       {/* 20vh text */}
       <div className="relative h-[20vh] flex flex-col items-start justify-end z-10">
         <div className="flex w-full max-w-6xl">
-          <div className="flex w-full max-w-6xl justify-start px-9 py-4">
+          <div className="flex w-full max-w-6xl justify-start px-4 md:px-9 py-4">
             <h1
-              className="font-main text-[64px] md:text-[120px] font-normal"
+              className="font-main text-[40px] sm:text-[60px] md:text-[80px] lg:text-[120px] font-normal leading-tight"
               style={{ color: "var(--color-background)" }}
             >
               <span ref={webRef}>WEB&nbsp;</span>
@@ -158,8 +158,8 @@ const Hero = () => {
             </h1>
           </div>
 
-          {/* Simple description */}
-          <div className="absolute right-9 top-10 max-w-md">
+          {/* Simple description - hidden on mobile, shown on desktop */}
+          <div className="hidden md:block absolute right-9 top-10 max-w-md">
             <p
               className="font-main text-sm font-normal leading-relaxed cursor-encapsulate"
               style={{ color: "var(--color-background)" }}
@@ -169,6 +169,18 @@ const Hero = () => {
               DESIGN WITH FUNCTIONALITY.
             </p>
           </div>
+        </div>
+
+        {/* Mobile description - shown below title on mobile */}
+        <div className="md:hidden px-4 mt-4">
+          <p
+            className="font-main text-sm font-normal leading-relaxed"
+            style={{ color: "var(--color-background)" }}
+          >
+            I'M AERON ALMENDRAS, A WEB DESIGNER AND DEVELOPER DEDICATED TO
+            BUILDING MODERN, USER-FOCUSED WEBSITES THAT COMBINE CREATIVE
+            DESIGN WITH FUNCTIONALITY.
+          </p>
         </div>
 
         {/* Scroll arrow */}
